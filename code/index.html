@@ -1,71 +1,57 @@
-class LoginControl extends React.Component {
+
+function FancyBorder(props) {
+  return (
+    <div className={'FancyBorder FancyBorder-' + props.color}>
+      {props.children}
+    </div>
+  );
+}
+
+function Dialog(props) {
+  return (
+    <FancyBorder color="blue">
+      <h1 className="Dialog-title">
+        {props.title}
+      </h1>
+      <p className="Dialog-message">
+        {props.message}
+      </p>
+      {props.children}
+    </FancyBorder>
+  );
+}
+
+class SignUpDialog extends React.Component {
   constructor(props) {
     super(props);
-    this.handleLoginClick = this.handleLoginClick.bind(this);
-    this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.state = {isLoggedIn: false};
-  }
-
-  handleLoginClick() {
-    this.setState({isLoggedIn: true});
-  }
-
-  handleLogoutClick() {
-    this.setState({isLoggedIn: false});
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
+    this.state = {login: ''};
   }
 
   render() {
-    const isLoggedIn = this.state.isLoggedIn;
-    let button;
-
-    if (isLoggedIn) {
-      button = <LogoutButton onClick={this.handleLogoutClick} />;
-    } else {
-      button = <LoginButton onClick={this.handleLoginClick} />;
-    }
-
     return (
-      <div>
-        <Greeting isLoggedIn={isLoggedIn} />
-        {button}
-      </div>
+      <Dialog title="Mars Exploration Program"
+              message="How should we refer to you?">
+        <input value={this.state.login}
+               onChange={this.handleChange} />
+        <button onClick={this.handleSignUp}>
+          Sign Me Up!
+        </button>
+      </Dialog>
     );
   }
-}
 
-function UserGreeting(props) {
-  return <h1>Welcome back!</h1>;
-}
-
-function GuestGreeting(props) {
-  return <h1>Please sign up.</h1>;
-}
-
-function Greeting(props) {
-  const isLoggedIn = props.isLoggedIn;
-  if (isLoggedIn) {
-    return <UserGreeting />;
+  handleChange(e) {
+    this.setState({login: e.target.value});
   }
-  return <GuestGreeting />;
-}
 
-function LoginButton(props) {
-  return (
-    <button onClick={props.onClick}>
-      Login
-    </button>
-  );
-}
-
-function LogoutButton(props) {
-  return (
-    <button onClick={props.onClick}>
-      Logout
-    </button>
-  );
+  handleSignUp() {
+    alert(`Welcome aboard, ${this.state.login}!`);
+  }
 }
 
 ReactDOM.render(
-  <LoginControl />,
+  <SignUpDialog />,
   document.getElementById('root')
 );

@@ -1,28 +1,16 @@
-class Toggle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {isToggleOn: true};
+import React from "react";
+import logo from "./logo.svg"
+import "./App.css";
+import { Button } from "react-bootstrap"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from "./Components/Header.js";
 
-    // This binding is necessary to make `this` work in the callback
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    this.setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
-    }));
-  }
-
-  render() {
+function App() {
     return (
-      <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? 'ON' : 'OFF'}
-      </button>
-    );
-  }
+        <div>
+        <Header />
+        </div>
+    )
 }
 
-ReactDOM.render(
-  <Toggle />,
-  document.getElementById('root')
-);
+export default App;

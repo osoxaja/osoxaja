@@ -29,7 +29,7 @@ pragma solidity ^0.4.17;
 
         approvers.push(msg.sender); 
     }
-    function createRequest(string description, uint value,address recipient) 
+  function createRequest(string description, uint value,address recipient) 
     public restricted {
  Request  memory newRequest = Request({
      description: description,
